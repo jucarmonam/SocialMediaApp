@@ -4,6 +4,18 @@ import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 
+export class UserNotFound extends Error {
+  constructor() {
+    super('User not found');
+  }
+}
+
+export class InvalidCredentials extends Error {
+  constructor() {
+    super('invalid credentials');
+  }
+}
+
 @Injectable()
 export class AuthService {
   constructor(private readonly users: UsersService, private jwtService: JwtService) {}
@@ -11,7 +23,7 @@ export class AuthService {
   async signIn(email: string, password: string): Promise<{access_token?: string}> {
     const user = await this.users.findOne(email);
     if (!user) {
-      throw new Error('User not found');
+      throw new InvalidCredentials();
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -22,7 +34,7 @@ export class AuthService {
       };
     }
 
-    return {};
+    throw new InvalidCredentials();
   }
   
 

@@ -1,5 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Body, Controller, NotFoundException, Post, UnauthorizedException } from '@nestjs/common';
+import { AuthService, InvalidCredentials, UserNotFound } from './auth.service';
 import { User } from '@prisma/client';
 
 @Controller('auth')
@@ -11,7 +11,15 @@ export class AuthController {
     @Body('email') email: string,
     @Body('password') password: string,
   ): Promise<{ access_token?: string }> {
-    return await this.auth.signIn(email, password);
+    try {
+      return await this.auth.signIn(email, password);
+    } catch (e) {
+      if (e instanceof InvalidCredentials) {
+        throw new UnauthorizedException('invalid credentials');
+      }
+
+      throw e;
+    }
   }
 
   @Post('register')
