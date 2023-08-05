@@ -1,0 +1,10 @@
+<app-singin *ngIf="!showRegistration"></app-singin>
+
+<div *ngIf="showRegistration">
+  <app-registration></app-registration>
+</div>
+
+<div>
+  <p *ngIf="!showRegistration">Don't have an account <a (click)="toggleRegistration()">Sing up here</a><p>
+  <p *ngIf="showRegistration">Already have an account? <a (click)="toggleRegistration()">Login</a></p>
+</div>

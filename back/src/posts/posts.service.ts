@@ -18,14 +18,22 @@ export class PostsService {
     });
   }
 
-  async findAll(keyword: string = '', date?: Date): Promise<Post[]> {
+  async findAll(keyword?: string, date?: Date): Promise<Post[]> {
+    if(date){
+        date = date ? new Date(date) : null
+        date.setUTCHours(0,0,0,0)
+    }
     return this.prisma.post.findMany({
       where: {
-        OR: [
-          {
+        AND: [ keyword ? {
             title: { contains: keyword, mode: 'insensitive' },
-          },
-          { createdAt: date },
+          } : {},
+          date ? {
+            createdAt: {
+                gte: date,
+                lt: new Date(date.getTime() + 24 * 60 * 60 * 1000), // Add 24 hours to include the entire day
+            },
+        } : {}
         ],
       },
     });
@@ -33,7 +41,7 @@ export class PostsService {
 
   async createPost(data: Prisma.PostCreateInput, email: string): Promise<Post> {
     return this.prisma.post.create({
-      data: { author: { connect: { email } }, ...data },
+      data: { author: { connect: { email } }, createdAt: new Date(), ...data },
     });
   }
 }

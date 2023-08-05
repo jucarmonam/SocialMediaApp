@@ -23,7 +23,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body('user') user: User): Promise<User> {
+  async register(@Body() user: User): Promise<User> {
     return await this.auth.signUp(user);
   }
 }

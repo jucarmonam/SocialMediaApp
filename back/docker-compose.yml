@@ -10,3 +10,10 @@ services:
       INIT_WAIT_SEC: 3
     ports:
       - 27017:27017
+  api:
+    image: nest-pnpm-docker
+    build: .
+    depends_on:
+      - mongo
+    ports:
+      - 3000:3000

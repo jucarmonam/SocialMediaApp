@@ -1,0 +1,28 @@
+<div>
+  <h2>Create a New Post</h2>
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="newPost.title" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea
+      matInput
+      placeholder="Message"
+      [(ngModel)]="newPost.message"
+    ></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="sharePost()">Share</button>
+</div>
+
+<div *ngIf="lastPost">
+  <h2>Last Post</h2>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ lastPost.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ lastPost.message }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
