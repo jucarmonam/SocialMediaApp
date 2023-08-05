@@ -3,7 +3,7 @@
 * Hacer "docker compose up" del docker-compose.yml en back para correr base de datos mongo
 * Dentro de back tambien en una terminal correr "pnpm install" y "pnpm run start" (instalar pnpm si es necesario)
 * dentro de front correr en una terminal "pnpm install" y "ng serve"
-* las Urls son:
+* las Endpoints son:
 * localhost:3000/auth/login {
     "email": "stiven2@gmail.com",
     "password": "pass2" 
