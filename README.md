@@ -19,4 +19,7 @@
 * localhost:3000/posts?date=2023-08-05&keyword=algoTItulo
 * localhost:3000/posts?user=stiven2@gmail.com
 * localhost:3000/posts
-* Con eso ya podras crear usuarios e iniciar sesion, tambien ya estan creados los servicios del backend para los posts/mensajes, pero no me alncanzo el tiempo y debo hacer otras cosas por lo cual no puedo dedicarle mas tiempo a la prueba, igualmente muchas gracias 
+* TODO:
+* Mejorar interfaz
+* crear interfaz para crear publicacion, ver mis publicaciones y ver todas las publicaciones y simplemente llamar a la api(La cual ya tiene implementados estos servicios)
+* boton de cerrar sesion
